@@ -1,36 +1,94 @@
 autoUpdate:
   enabled: true
-  schedule: '0 0 * * *'
+  schedule: 0 0 * * *
+bootConfigURL: https://github.com/cloudbees/arcalos-boot-config.git
 cluster:
-  clusterName: ""
-  environmentGitOwner: ""
-  project: ""
+  clusterName: chestwhite
+  environmentGitOwner: arcalos-environments
+  environmentGitPublic: true
+  externalDNSSAName: chestwhite-dn
+  gitKind: github
+  gitName: github
+  gitPublic: true
+  gitServer: https://github.com
+  gke:
+    projectNumber: "377526783228"
+  kanikoSAName: chestwhite-ko
+  namespace: jx
+  project: aps-chestwhite
   provider: gke
-  zone: ""
-gitops: true
+  registry: gcr.io
+  vaultName: chestwhite
+  vaultSAName: chestwhite-vt
+  zone: us-east1-c
+environments:
+- ingress:
+    cloud_dns_secret_name: external-dns-gcp-sa
+    domain: aps-chestwhite.play-jxaas.live
+    domainIssuerURL: https://jx-tenant-service-jx.aps-raccoonshimmer.play-jxaas.live
+    externalDNS: true
+    namespaceSubDomain: -jx.
+    tls:
+      email: jenkins-x@cloudbees.com
+      enabled: true
+      production: true
+  key: dev
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: staging
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: production
 githubApp:
   enabled: false
-environments:
-- key: dev
-- key: staging
-- key: production
+  url: https://lighthouse-githubapp-jx.aps-lordlemon.jxaas.live
+gitops: true
 ingress:
-  domain: ""
-  externalDNS: false
+  cloud_dns_secret_name: external-dns-gcp-sa
+  domain: aps-chestwhite.play-jxaas.live
+  domainIssuerURL: https://jx-tenant-service-jx.aps-raccoonshimmer.play-jxaas.live
+  externalDNS: true
+  namespaceSubDomain: -jx.
   tls:
     email: jenkins-x@cloudbees.com
     enabled: true
-    production: false
+    production: true
 kaniko: true
+repository: nexus
 secretStorage: vault
 storage:
+  backup:
+    enabled: true
+    url: gs://aps-chestwhite-backup
   logs:
-    enabled: false
-    url: ""
+    enabled: true
+    url: gs://aps-chestwhite-lts
   reports:
     enabled: false
     url: ""
   repository:
     enabled: false
     url: ""
+vault:
+  bucket: aps-chestwhite-vault
+  key: chestwhite-crypto-key
+  keyring: chestwhite-keyring
+  name: chestwhite
+  serviceAccount: chestwhite-vt
+velero: {}
+versionStream:
+  ref: v0.0.103
+  url: https://github.com/cloudbees/arcalos-jenkins-x-versions.git
 webhook: prow

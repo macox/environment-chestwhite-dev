@@ -1,0 +1,14 @@
+adminUser:
+  password: vault:chestwhite/adminUser:password
+  username: admin
+dashboardAuthID: vault:chestwhite:dashboardAuthID
+dashboardAuthOrg: arcalos-dashboard
+dashboardAuthSecret: vault:chestwhite:dashboardAuthSecret
+dashboardGrpchost: dex.jx
+enableDocker: false
+pipelineUser:
+  email: arcalos-admin@googlegroups.com
+  token: vault:chestwhite/pipelineUser:token
+  username: arcalos-bot
+prow:
+  hmacToken: vault:chestwhite/prow:hmacToken
